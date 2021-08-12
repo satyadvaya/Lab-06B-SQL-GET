@@ -28,31 +28,47 @@ describe('app routes', () => {
       return client.end(done);
     });
 
-    test('returns animals', async() => {
-
+    test('returns soups', async() => {
       const expectation = [
         {
           'id': 1,
-          'name': 'bessie',
-          'cool_factor': 3,
-          'owner_id': 1
+          'name': 'spinach',
+          'category': 'creamy',
+          'seasonal': false,
+          'tastiness': 8
         },
         {
           'id': 2,
-          'name': 'jumpy',
-          'cool_factor': 4,
-          'owner_id': 1
+          'name': 'minestrone',
+          'category': 'brothy',
+          'seasonal': false,
+          'tastiness': 5
         },
         {
           'id': 3,
-          'name': 'spot',
-          'cool_factor': 10,
-          'owner_id': 1
+          'name': 'chickpea',
+          'category': 'earthy',
+          'seasonal': false,
+          'tastiness': 7
+        },
+        {
+          'id': 4,
+          'name': 'mushroom',
+          'category': 'hearty',
+          'seasonal': true,
+          'tastiness': 9
+        },
+        {
+          'id': 5,
+          'name': 'cauliflower',
+          'category': 'creamy',
+          'seasonal': false,
+          'tastiness': 6
         }
       ];
 
       const data = await fakeRequest(app)
-        .get('/animals')
+        .get('/soups')
         .expect('Content-Type', /json/)
         .expect(200);
 
