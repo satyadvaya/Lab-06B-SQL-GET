@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const { execSync } = require('child_process');
-
 const fakeRequest = require('supertest');
 const app = require('../lib/app');
 const client = require('../lib/client');
@@ -111,6 +110,22 @@ describe('app routes', () => {
       expect(data.body.id).toBeGreaterThan(0);
     });
 
+    test('PUT /soups/:id updates soup', async ()=>{
+      const updatedData =   {
+        'name': 'spinach',
+        'category': 'hearty',
+        'seasonal': false,
+        'tastiness': 6
+      };
+      const data = await fakeRequest(app)
+        .put('/soups/1')
+        .send(updatedData)
+        .expect(200)
+        .expect('Content-Type', /json/);
 
+      expect(data.body.title).toEqual(updatedData.title);
+      expect(data.body.category).toEqual(updatedData.category);
+      expect(data.tastiness).toEqual(updatedData.tastiness);
+    });
   });
 });
