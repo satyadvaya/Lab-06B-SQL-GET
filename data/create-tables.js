@@ -23,18 +23,17 @@ async function run() {
                     category VARCHAR(512) NOT NULL,
                     seasonal BOOL NOT NULL,
                     tastiness INTEGER NOT NULL
-            );
-        `);
+                );
+    `);
 
     console.log('create tables complete', getEmoji(), getEmoji(), getEmoji());
-  }
-  catch(err) {
+
+  } catch(err) {
     // problem? let's see the error...
     console.log(err);
-  }
-  finally {
+
+  } finally {
     // success or failure, need to close the db connection
     client.end();
   }
-
 }

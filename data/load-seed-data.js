@@ -18,7 +18,8 @@ async function run() {
                       VALUES ($1, $2)
                       RETURNING *;
                   `,
-        [user.email, user.hash]);
+        [user.email, user.hash]
+        );
       })
     );
       
@@ -30,11 +31,11 @@ async function run() {
                     INSERT INTO soups (name, category, seasonal, tastiness)
                     VALUES ($1, $2, $3, $4);
                 `,
-        [soup.name, soup.category, soup.seasonal, soup.tastiness]);
+        [soup.name, soup.category, soup.seasonal, soup.tastiness]
+        );
       })
     );
     
-
     console.log('seed data load complete', getEmoji(), getEmoji(), getEmoji());
   }
   catch(err) {
@@ -43,5 +44,4 @@ async function run() {
   finally {
     client.end();
   }
-    
 }
