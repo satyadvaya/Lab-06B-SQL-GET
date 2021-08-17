@@ -1,31 +1,31 @@
 const data = [
   {
     'name': 'spinach',
-    'category': 'creamy',
+    'category_id': 1,
     'seasonal': false,
     'tastiness': 8
   },
   {
     'name': 'minestrone',
-    'category': 'brothy',
+    'category_id': 2,
     'seasonal': false,
     'tastiness': 5
   },
   {
     'name': 'chickpea',
-    'category': 'earthy',
+    'category_id': 3,
     'seasonal': false,
     'tastiness': 7
   },
   {
     'name': 'mushroom',
-    'category': 'hearty',
+    'category_id': 4,
     'seasonal': true,
     'tastiness': 9
   },
   {
     'name': 'cauliflower',
-    'category': 'creamy',
+    'category_id': 1,
     'seasonal': false,
     'tastiness': 6
   }
