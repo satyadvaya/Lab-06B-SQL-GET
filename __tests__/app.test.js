@@ -22,7 +22,7 @@ describe('app routes', () => {
       //   });
       
       // token = signInData.body.token; // eslint-disable-line
-    }, 10000);
+    }, 20000);
   
     afterAll(done => {
       return client.end(done);
@@ -30,6 +30,13 @@ describe('app routes', () => {
 
     test('GET /soups returns list of soups', async () => {
       const expectation = soupData.map(soup => soup.name);
+      const expectedShape = {
+        'id': 1,
+        'name': 'spinach',
+        'category': 'creamy',
+        'seasonal': false,
+        'tastiness': 8
+      };
       // [
       //   {
       //     'id': 1,
@@ -77,11 +84,19 @@ describe('app routes', () => {
 
       expect(names).toEqual(expectation);
       expect(names.length).toBe(soupData.length);
-    }, 10000);
+      expect(data.body[0]).toEqual(expectedShape);
+    }, 20000);
     
     test('GET /soups/:id returns the individual soup', async () => {
-      const expectation = soupData[0];
-      expectation.id = 1;
+      const expectation = {
+        'id': 1,
+        'name': 'spinach',
+        'category': 'creamy',
+        'seasonal': false,
+        'tastiness': 8
+      };
+      // const expectation = soupData[0];
+      // expectation.id = 1;
       
       const data = await fakeRequest(app)
         .get('/soups/1')
