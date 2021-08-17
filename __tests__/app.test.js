@@ -109,7 +109,7 @@ describe('app routes', () => {
     test('POST /soups creates a new soup', async () => {
       const newSoup = {
         name: 'tear',
-        category: 'salty',
+        category_id: 5,
         seasonal: false,
         tastiness: 1
       };
@@ -127,7 +127,7 @@ describe('app routes', () => {
     test('PUT /soups/:id updates soup', async () => {
       const updatedData = {
         'name': 'spinach',
-        'category': 'hearty',
+        'category_id': 4,
         'seasonal': false,
         'tastiness': 6
       };
@@ -138,7 +138,7 @@ describe('app routes', () => {
         .expect('Content-Type', /json/);
 
       expect(data.body.name).toEqual(updatedData.name);
-      expect(data.body.category).toEqual(updatedData.category);
+      expect(data.body.category_id).toEqual(updatedData.category_id);
       expect(data.body.tastiness).toEqual(updatedData.tastiness);
     });
   });
