@@ -22,7 +22,7 @@ describe('app routes', () => {
       //   });
       
       // token = signInData.body.token; // eslint-disable-line
-    }, 10000);
+    }, 20000);
   
     afterAll(done => {
       return client.end(done);
@@ -30,6 +30,13 @@ describe('app routes', () => {
 
     test('GET /soups returns list of soups', async () => {
       const expectation = soupData.map(soup => soup.name);
+      const expectedShape = {
+        'id': 1,
+        'name': 'spinach',
+        'category': 'creamy',
+        'seasonal': false,
+        'tastiness': 8
+      };
       // [
       //   {
       //     'id': 1,
@@ -77,11 +84,19 @@ describe('app routes', () => {
 
       expect(names).toEqual(expectation);
       expect(names.length).toBe(soupData.length);
-    }, 10000);
+      expect(data.body[0]).toEqual(expectedShape);
+    }, 20000);
     
     test('GET /soups/:id returns the individual soup', async () => {
-      const expectation = soupData[0];
-      expectation.id = 1;
+      const expectation = {
+        'id': 1,
+        'name': 'spinach',
+        'category': 'creamy',
+        'seasonal': false,
+        'tastiness': 8
+      };
+      // const expectation = soupData[0];
+      // expectation.id = 1;
       
       const data = await fakeRequest(app)
         .get('/soups/1')
@@ -94,7 +109,7 @@ describe('app routes', () => {
     test('POST /soups creates a new soup', async () => {
       const newSoup = {
         name: 'tear',
-        category: 'salty',
+        category_id: 5,
         seasonal: false,
         tastiness: 1
       };
@@ -112,7 +127,7 @@ describe('app routes', () => {
     test('PUT /soups/:id updates soup', async () => {
       const updatedData = {
         'name': 'spinach',
-        'category': 'hearty',
+        'category_id': 4,
         'seasonal': false,
         'tastiness': 6
       };
@@ -123,7 +138,7 @@ describe('app routes', () => {
         .expect('Content-Type', /json/);
 
       expect(data.body.name).toEqual(updatedData.name);
-      expect(data.body.category).toEqual(updatedData.category);
+      expect(data.body.category_id).toEqual(updatedData.category_id);
       expect(data.body.tastiness).toEqual(updatedData.tastiness);
     });
   });
